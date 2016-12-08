@@ -1,0 +1,17 @@
+version: '2'
+services:
+    db:
+        image: mysql:5.7
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: db
+            MYSQL_USER: root
+    web:
+        build: .
+        environment:
+            PYTHONUNBUFFERED: 1
+        command: python manage.py runserver 0.0.0.0:8000
+        ports:
+            - "8877:8000"
+        depends_on:
+        - db
